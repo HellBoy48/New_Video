@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Видео</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background: black;
+      overflow: hidden;
+    }
+
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 1;
+      background-color: black;
+      pointer-events: none; /* отключает касания по видео */
+    }
+  </style>
+</head>
+<body>
+
+  <video autoplay playsinline muted="false">
+    <source src="video.mp4" type="video/mp4">
+    Ваш браузер не поддерживает видео.
+  </video>
+
+  <script>
+    const video = document.querySelector("video");
+
+    // Убедиться, что звук включён
+    video.muted = false;
+
+    // Автозапуск
+    window.addEventListener("load", () => {
+      video.play().catch(err => {
+        console.warn("Ошибка воспроизведения:", err);
+      });
+    });
+
+    // Защита от паузы
+    video.addEventListener("pause", () => {
+      video.play();
+    });
+  </script>
+
+</body>
+</html>
